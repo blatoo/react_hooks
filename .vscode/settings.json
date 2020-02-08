@@ -1,0 +1,8 @@
+{
+	"workbench.colorTheme": "Cobalt2",
+	"editor.snippetSuggestions": "top",
+	"files.associations": {
+		"*.js": "javascriptreact"
+	},
+	"editor.fontSize": 16
+}
