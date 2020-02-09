@@ -20,7 +20,12 @@ const Ingredients = () => {
 				}
 				setUserIngredients(loadedIngredients);
 			});
-	}, []);
+  }, []);
+  
+  // Runing after each rendering
+  useEffect(()=>{
+    console.log('Rendering Ingredients')
+  })
 
 	const addIngredientHandler = ingredient => {
 		fetch("https://react-hooks-8efdb.firebaseio.com/ingredients.json", {
