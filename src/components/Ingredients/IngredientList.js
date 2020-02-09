@@ -2,6 +2,11 @@ import React from 'react';
 
 import './IngredientList.css';
 
+/**
+ * 
+ * @param {*} props.ingredients 
+ * @param  props.onRemoveItem <Func>
+ */
 const IngredientList = props => {
   return (
     <section className="ingredient-list">
