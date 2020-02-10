@@ -20,13 +20,18 @@ const Ingredients = () => {
 				}
 				setUserIngredients(loadedIngredients);
 			});
-  }, []);
-  
-  // Runing after each rendering
-  useEffect(()=>{
-    console.log('Rendering Ingredients')
-  })
+	}, []);
 
+	// Runing after each rendering
+	useEffect(() => {
+		console.log("Rendering Ingredients", userIngredients);
+	}, [userIngredients]);
+
+	const filteredIngredientsHandler = (filteredIngredients) => {
+		setUserIngredients(filteredIngredients)
+
+	}
+	
 	const addIngredientHandler = ingredient => {
 		fetch("https://react-hooks-8efdb.firebaseio.com/ingredients.json", {
 			method: "POST",
@@ -55,7 +60,7 @@ const Ingredients = () => {
 			<IngredientForm onAddIngredient={addIngredientHandler} />
 
 			<section>
-				<Search />
+				<Search onLoadIngredients={filteredIngredientsHandler}/>
 				<IngredentList
 					ingredients={userIngredients}
 					onRemoveItem={removeIngredientHandler}
