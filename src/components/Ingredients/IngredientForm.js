@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 import Card from "../UI/Card";
 import "./IngredientForm.css";
+import LoadingIndicator from "../UI/LoadingIndicator";
 
+/**
+ * @param onAddIngredient <Func> the action of add an ingredient. Used in "form onSubmit"
+ * @param loading 
+ */
 const IngredientForm = React.memo(props => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
@@ -40,6 +45,8 @@ const IngredientForm = React.memo(props => {
 					</div>
 					<div className="ingredient-form__actions">
 						<button type="submit">Add Ingredient</button>
+						{props.loading && <LoadingIndicator />}
+
 					</div>
 				</form>
 			</Card>

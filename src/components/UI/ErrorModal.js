@@ -2,6 +2,12 @@ import React from 'react';
 
 import './ErrorModal.css';
 
+/**
+ * + Functional component
+ * + have children component
+ * @param onClose <Func> click and close the modal
+ * 
+ */
 const ErrorModal = React.memo(props => {
   return (
     <React.Fragment>
