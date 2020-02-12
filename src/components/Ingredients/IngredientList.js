@@ -8,7 +8,6 @@ import "./IngredientList.css";
  * @param  props.onRemoveItem <Func>
  */
 const IngredientList = props => {
-	console.log("IngredientList rendered");
 	return (
 		<section className="ingredient-list">
 			<h2>Loaded Ingredients</h2>
