@@ -6,15 +6,16 @@ export const AuthContext = React.createContext({
 });
 
 const AuthContextProvider = props => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(true);
 
 	const loginHandler = () => {
-        console.log(isAuthenticated)
 		setIsAuthenticated(true);
 	};
 
 	return (
-		<AuthContext.Provider value={{ isAuth: isAuthenticated, login: loginHandler }}>
+		<AuthContext.Provider
+			value={{ isAuth: isAuthenticated, login: loginHandler }}
+		>
 			{props.children}
 		</AuthContext.Provider>
 	);

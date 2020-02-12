@@ -6,15 +6,15 @@ import LoadingIndicator from "../UI/LoadingIndicator";
 
 /**
  * @param onAddIngredient <Func> the action of add an ingredient. Used in "form onSubmit"
- * @param loading 
+ * @param loading
  */
 const IngredientForm = React.memo(props => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
-
+	const [enteredTitle, setEnteredTitle] = useState("");
+	const [enteredAmount, setEnteredAmount] = useState("");
+	console.log("Rendering Ingredient Form");
 	const submitHandler = event => {
 		event.preventDefault();
-		props.onAddIngredient({title: enteredTitle, amount: enteredAmount})
+		props.onAddIngredient({ title: enteredTitle, amount: enteredAmount });
 	};
 
 	return (
@@ -46,7 +46,6 @@ const IngredientForm = React.memo(props => {
 					<div className="ingredient-form__actions">
 						<button type="submit">Add Ingredient</button>
 						{props.loading && <LoadingIndicator />}
-
 					</div>
 				</form>
 			</Card>

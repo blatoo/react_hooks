@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useCallback } from "react";
+import React, { useReducer, useEffect, useCallback, useMemo } from "react";
 import IngredentList from "./IngredientList";
 import IngredientForm from "./IngredientForm";
 import Search from "./Search";
@@ -52,15 +52,15 @@ const Ingredients = () => {
 		error: null
 	});
 
-	useEffect(() => {
-		console.log("Rendering Ingredients", userIngredients);
-	}, [userIngredients]);
+	// useEffect(() => {
+	// 	console.log("Rendering Ingredients", userIngredients);
+	// }, [userIngredients]);
 
 	const filteredIngredientsHandler = useCallback(filteredIngredients => {
 		dispatch({ type: "SET", ingredients: filteredIngredients });
 	}, []);
 
-	const addIngredientHandler = ingredient => {
+	const addIngredientHandler = useCallback(ingredient => {
 		dispatchHttp({ type: "SEND" });
 		fetch("https://react-hooks-8efdb.firebaseio.com/ingredients.json", {
 			method: "POST",
@@ -83,9 +83,9 @@ const Ingredients = () => {
 					errorMessage: error.message
 				});
 			});
-	};
+	}, []);
 
-	const removeIngredientHandler = ingredientId => {
+	const removeIngredientHandler = useCallback(ingredientId => {
 		dispatchHttp({ type: "SEND" });
 		fetch(
 			`https://react-hooks-8efdb.firebaseio.com/ingredients/${ingredientId}.json`,
@@ -100,11 +100,20 @@ const Ingredients = () => {
 			.catch(error => {
 				dispatch({ type: "ERROR", errorMessage: error.message });
 			});
-	};
+	}, []);
 
-	const onClosingError = () => {
+	const onClosingError = useCallback(() => {
 		dispatchHttp({ type: "CLEAR" });
-	};
+	}, []);
+
+	let ingredientList = useMemo(() => {
+		return (
+			<IngredentList
+				ingredients={userIngredients}
+				onRemoveItem={removeIngredientHandler}
+			/>
+		);
+	}, [userIngredients, removeIngredientHandler]);
 
 	return (
 		<div className="App">
@@ -118,10 +127,7 @@ const Ingredients = () => {
 
 			<section>
 				<Search onLoadIngredients={filteredIngredientsHandler} />
-				<IngredentList
-					ingredients={userIngredients}
-					onRemoveItem={removeIngredientHandler}
-				/>
+				{ingredientList}
 			</section>
 		</div>
 	);
